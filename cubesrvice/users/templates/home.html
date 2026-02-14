@@ -1,0 +1,269 @@
+  {% include 'header.html' %}
+<!-- ================= SEARCH BAR ================= -->
+<section class="search-section" >
+  <div class="search-container" >
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="Search for services, products, repairs..."
+      onkeyup="filterProducts()"
+    >
+    <button type="button">🔍</button>
+  </div>
+</section>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cube Service | Home Services</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+
+
+
+<style>
+body{
+   position: relative;
+}  
+
+</style>
+</head>
+    
+  {% block content %}
+<body>
+  {% if messages %}
+<div style="margin: 10px 0;">
+    {% for message in messages %}
+   <div class="auto-message" style="padding: 10px; background: #ffcc00; color: #000; border-radius: 5px;">
+    {{ message }}
+</div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+  
+
+<!-------Banner-->
+
+<section class="categories" style="margin-top:45px;">
+    {% for k in keywords %}
+        <h2> <i class="fa-solid fa-screwdriver-wrench" style="margin-right:8px; color:#2563eb;"></i>{{ k.keyword }}</h2>
+    {% empty %}
+        <li>No keywords available</li>
+    {% endfor %}
+    <div class="category-grid">
+        {% for service in services %}
+         <a href="/{{ service.productName|lower|cut:' ' }}">
+            <div class="category">
+                <img src="{{ service.productImage.url }}" alt="">
+                <p>{{ service.productName }}</p>
+            </div>
+          </a>
+        {% empty %}
+            <p>No services available</p>
+        {% endfor %}
+    </div>
+</section> 
+   <section class="banner">
+ <div class="img-slider">
+        {% for slide in sliders %}
+      <a href="/{{ slide.link_name }}"><div class="img-slide {% if forloop.first %}active{% endif %}">
+            <img src="{{ slide.image.url }}" alt="Banner">
+         
+        </div></a>
+        {% endfor %}
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<section class="popular-bookings">
+ {% for k in keyword_one_list %}
+        <h2> <i class="fa-solid fa-screwdriver-wrench" style="margin-right:8px; color:#2563eb;"></i>{{ k.keyword }}</h2>
+    {% empty %}
+        <li>No keyword one data</li>
+    {% endfor %}
+
+  <div class="booking-slider">
+    {% for service in popular_services %}
+     <a href="/{{ service.link }}"><div class="booking-card">
+        <div class="booking-img"
+             style="background-image:url('{{ service.product_image.url }}')">
+        </div>
+        
+        <h3 class="ha">{{ service.product_name }}</h3>
+        <p class="ha">{{ service.service_details|truncatechars:50 }}</p>
+        <p class="raiting">⭐ {{ service.rating }}/5 </p>
+        <div class="booking-price" style="margin: 12px; margin:10px 0;">₹{{ service.price }}</div>
+
+      
+      </div></a>
+    {% empty %}
+      <p>No popular bookings available</p>
+    {% endfor %}
+  </div>
+
+  <a href="{% url 'users:all_services' %}"><div class="see">See All →</div></a>
+</section>
+<!-- ADVERTISEMENT SECTION -->
+
+    <!-- ================= DYNAMIC ADVERTISEMENT ================= -->
+<section class="ad">
+    <div class="ad-slider">
+
+        {% for ad in ads %}
+            <div class="ad-slide {% if forloop.first %}active{% endif %}">
+                <img src="{{ ad.image.url }}" alt="Advertisement">
+            </div>
+        {% empty %}
+            <!-- fallback if no ads -->
+            <div class="ad-slide active">
+                <img src="{% static 'images/ROW.webp' %}" alt="Default Ad">
+            </div>
+        {% endfor %}
+
+        
+
+    </div>
+</section>
+
+
+      
+    </div>
+
+<section class="popular-bookings">
+  <h2> <i class="fa-solid fa-screwdriver-wrench" style="margin-right:8px; color:#2563eb;"></i>Kitchen Product Services</h2>
+
+  <div class="booking-slider">
+    {% for service in product_services %}
+     <a href="/{{ service.link }}"><div class="booking-card">
+        <div class="booking-img"
+             style="background-image:url('{{ service.productImage.url }}')">
+        </div>
+
+        <h3>{{ service.productName }}</h3>
+        <p>{{ service.serviceDetails|truncatechars:50 }}</p>
+        <p class="raiting">⭐ {{ service.rating }}/5 </p>
+        <div class="booking-price" style="margin: 12px; margin:10px 0;">₹{{ service.price }}</div>
+
+      
+      </div></a>
+    {% empty %}
+      <p>No popular bookings available</p>
+    {% endfor %}
+  </div>
+  <a href="{% url 'users:all_services' %}"><div class="see">See All →</div></a>
+</section>
+
+
+<section class="popular-bookings">
+  <h2> <i class="fa-solid fa-screwdriver-wrench" style="margin-right:8px; color:#2563eb;"></i>Sessional Product Services</h2>
+
+  <div class="booking-slider">
+    {% for service in  sessional_services %}
+      <a href="/{{ service.link }}"><div class="booking-card">
+        <div class="booking-img"
+             style="background-image:url('{{ service.productImage.url }}')">
+        </div>
+
+        <h3>{{ service.productName }}</h3>
+        <p>{{ service.serviceDetails|truncatechars:50 }}</p>
+        <p class="raiting">⭐ {{ service.rating }}/5 </p>
+        <div class="booking-price" style="margin: 12px; margin:10px 0;">₹{{ service.price }}</div>
+
+      
+      </div></a>
+    {% empty %}
+      <p>No popular bookings available</p>
+    {% endfor %}
+  </div>
+   <a href="{% url 'users:all_services' %}"><div class="see">See All →</div></a>
+</section>
+
+  
+
+
+
+  <!-- ================= DYNAMIC ADVERTISEMENT 1 ================= -->
+<section class="ad">
+    <div class="ad-slider">
+
+        {% for ad in ads1 %}
+            <div class="ad-slide {% if forloop.first %}active{% endif %}">
+                <img src="{{ ad.image.url }}" alt="Advertisement 1">
+            </div>
+        {% empty %}
+            <!-- fallback if no ads -->
+            <div class="ad-slide active">
+                <img src="{% static 'images/ROW.webp' %}" alt="Default Ad">
+            </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}
+{% include 'footer.html' %}
+<script>
+/* Slider Logic Only */
+    const slides = document.querySelectorAll('.img-slide');
+    let currentSlide = 0;
+
+    if(slides.length > 0) {
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 4000);
+    }
+
+    function filterProducts() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let cards = document.querySelectorAll(".booking-card");
+
+    cards.forEach(card => {
+        let text = card.innerText.toLowerCase();
+
+        if (text.includes(input)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+</script>
+
+
+
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/919876543210?text=Hi%20CubeService,%20I%20need%20help"
+   class="whatsapp-float"
+   target="_blank"
+   title="Chat on WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+         alt="WhatsApp Chat">
+</a>
+
+
+<!-- Phone Floating Button -->
+<a href="tel:9555286398"
+   class="phone-float"
+   title="Call Us">
+    <i class="fas fa-phone"></i>
+</a>
+
+
+</body>
+</html>

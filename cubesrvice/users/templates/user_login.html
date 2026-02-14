@@ -1,0 +1,372 @@
+{% if error %}
+<div style="position: fixed; top: 20px; right: 20px; background:#fee2e2;color:#b91c1c;padding:15px;border-radius:8px;z-index:1000;box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 5px solid #ef4444;">
+    <i class="fas fa-exclamation-circle"></i> {{ error }}
+</div>
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register | Cube Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --secondary: #10b981;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* --- LEFT SIDE: BRANDING --- */
+        .brand-section {
+            flex: 1.2;
+            background: linear-gradient(135deg, #4f46e5 0%, #312e81 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            color: white;
+            position: relative;
+        }
+
+        .brand-content { max-width: 500px; text-align: center; }
+
+        .brand-logo {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .brand-logo span { color: #818cf8; }
+
+        .brand-section h1 { font-size: 2.5rem; margin-bottom: 20px; line-height: 1.2; }
+
+        .feature-list {
+            text-align: left;
+            margin-top: 40px;
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .feature-list i {
+            background: rgba(255,255,255,0.2);
+            padding: 8px;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* --- RIGHT SIDE: FORM --- */
+        .form-section {
+            flex: 1;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 480px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: #f1f5f9;
+            padding: 5px;
+            border-radius: 12px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 10px;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .input-group { margin-bottom: 18px; }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .input-box { position: relative; }
+
+        .input-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 12px 12px 12px 42px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .input-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .grid-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .location-btn {
+            width: 100%;
+            background: #f0fdf4;
+            color: var(--secondary);
+            border: 1px dashed var(--secondary);
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .location-btn:hover { background: #dcfce7; }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+        .form-content { display: none; }
+        .form-content.active { display: block; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .brand-section { display: none; }
+            body { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="brand-section">
+    <div class="brand-content">
+        <div class="brand-logo">Cube<span>Service</span></div>
+        <h1>Your Home, <br>Our Responsibility.</h1>
+        <p>Get professional repair and home services at your doorstep with just one click.</p>
+        
+        <ul class="feature-list">
+            <li><i class="fas fa-check"></i> Verified Professionals</li>
+            <li><i class="fas fa-clock"></i> 60 Min Service Guarantee</li>
+            <li><i class="fas fa-shield-alt"></i> 30 Days Warranty</li>
+            <li><i class="fas fa-tags"></i> Transparent Pricing</li>
+        </ul>
+    </div>
+</div>
+
+<div class="form-section">
+    <div class="auth-card">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('login')">Login</div>
+            <div class="tab" onclick="switchTab('register')">Register</div>
+        </div>
+
+        <form id="login-form" class="form-content active" method="POST" action="{% url 'users:user_login' %}">
+            {% csrf_token %}
+            <div class="input-group">
+                <label>Mobile Number</label>
+                <div class="input-box">
+                    <i class="fas fa-phone"></i>
+                    <input type="text" name="phone" placeholder="9876543210" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-box">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" placeholder="••••••••" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary">Welcome Back</button>
+        </br>
+    </br>
+             <a href="{% url 'users:forgot_password' %}" style="text-decoration:none;"><div class="btn-secondary"><center>Forgot Password </center></div></a>
+             
+        </form>
+    
+
+        <form id="register-form" class="form-content" method="POST" action="{% url 'users:register' %}">
+            {% csrf_token %}
+            <div class="input-group">
+                <label>Full Name</label>
+                <div class="input-box">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="fullname" placeholder="Enter full name" required>
+                </div>
+            </div>
+
+            <div class="grid-inputs">
+                <div class="input-group">
+                    <label>Mobile</label>
+                    <div class="input-box"><i class="fas fa-phone"></i><input type="text" name="mobile" required></div>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <div class="input-box"><i class="fas fa-envelope"></i><input type="email" name="email" required></div>
+                </div>
+            </div>
+
+            <div onclick="getLocation()" class="location-btn">
+                <i class="fas fa-location-arrow"></i> Auto-fill Current Location
+            </div>
+
+            <div class="input-group">
+                <label>Detailed Address</label>
+                <div class="input-box">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" id="address" name="address" placeholder="Flat, Street, Landmark" required>
+                </div>
+            </div>
+
+            <div class="grid-inputs">
+                <div class="input-group">
+                    <label>Pincode</label>
+                    <div class="input-box"><input type="text" id="pincode" name="pincode" onblur="fetchDetails(this.value)" required></div>
+                </div>
+                <div class="input-group">
+                    <label>District</label>
+                    <div class="input-box"><input type="text" id="district" name="district" readonly style="background: #f8fafc;"></div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>State</label>
+                <div class="input-box"><input type="text" id="state" name="state" readonly style="background: #f8fafc;"></div>
+            </div>
+
+            <div class="grid-inputs">
+                <div class="input-group">
+                    <label>Create Password</label>
+                    <div class="input-box"><input type="password" name="password" required></div>
+                </div>
+                <div class="input-group">
+                    <label>Confirm</label>
+                    <div class="input-box"><input type="password" name="cpassword" required></div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Join Cube Service</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function switchTab(type) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.form-content').forEach(f => f.classList.remove('active'));
+        if(type === 'login') {
+            document.querySelector('.tab:nth-child(1)').classList.add('active');
+            document.getElementById('login-form').classList.add('active');
+        } else {
+            document.querySelector('.tab:nth-child(2)').classList.add('active');
+            document.getElementById('register-form').classList.add('active');
+        }
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+                const data = await res.json();
+                if(data.address) {
+                    document.getElementById('address').value = data.display_name;
+                    if(data.address.postcode) {
+                        document.getElementById('pincode').value = data.address.postcode;
+                        fetchDetails(data.address.postcode);
+                    }
+                }
+            });
+        }
+    }
+
+    async function fetchDetails(pincode) {
+        if(pincode.length === 6) {
+            const res = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+            const data = await res.json();
+            if(data[0].Status === "Success") {
+                document.getElementById('district').value = data[0].PostOffice[0].District;
+                document.getElementById('state').value = data[0].PostOffice[0].State;
+            }
+        }
+    }
+</script>
+</body>
+</html>

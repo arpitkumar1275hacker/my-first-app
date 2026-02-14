@@ -1,0 +1,207 @@
+/* ================= AUTH MODAL ================= */
+body{
+    padding-top: 60px; /* header ki height ke according adjust karein */
+}
+
+/* Tablet */
+@media (max-width: 1024px){
+    body{
+        padding-top: 170px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px){
+    body{
+        padding-top: 10px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px){
+    body{
+        padding-top: 100px;
+    }
+}
+
+/* ================= SEARCH BAR ================= */
+.search-section{
+    width:100%;
+    padding:29px 13px;
+    background:#f4f6fb;
+    position:sticky;
+    top:60px; /* header ke niche fix */
+    z-index:99;
+   
+}
+
+.search-container{
+    max-width:900px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    background:#f4f6f8;
+    border-radius:30px;
+    padding:6px 10px;
+     position:sticky;
+}
+
+.search-container input{
+    flex:1;
+    border:1px solid:black;
+    padding:12px 25px;
+    font-size:15px;
+    outline:black;
+    
+}
+
+.search-container button{
+        
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+/* Mobile */
+@media (max-width:768px){
+    .search-container{
+        max-width:100%;
+        margin-top:94px;
+    }
+}
+
+/* Laptop */
+/* ================= BANNER ================= */
+
+/* ================= BANNER OPTIMIZATION ================= */
+.banner {
+    width: 100%;
+     /* Thoda gap top-bottom se */
+   
+    margin:auto;
+    border-radius: 18px;
+}
+
+.img-slider {
+    position: relative;
+    width: 100%;
+    /* Aspect ratio se height automatically photo ke hisaab se adjust hogi */
+    aspect-ratio: 16 / 7; 
+    max-height: 500px; /* Laptop par bahut bada na dikhe */
+    overflow: hidden;
+}
+
+.img-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-slide.active {
+    opacity: 1;
+}
+
+.img-slide img {
+    width: 100%;
+    height: 100%;
+    /* Isse photo stretch nahi hogi aur poori dikhegi */
+    object-fit: fill; 
+    border-radius: 0; /* Agar rounded look chahiye toh 15px kar sakte hain */
+}
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+    .img-slider {
+        aspect-ratio: 16 / 9; /* Mobile ke liye thoda rectangular ratio */
+        height: auto;
+    }
+    
+    .search-section {
+        padding: 15px 10px;
+    }
+}
+/* ================= RESPONSIVE ================= */
+
+/* ===== WHATSAPP FLOAT BUTTON ===== */
+.whatsapp-float{
+    position:fixed;
+    bottom:90px;
+    right:20px;
+    width:60px;
+    height:60px;
+    background:#25D366;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    z-index:9999;
+    transition:0.3s;
+}
+
+.whatsapp-float img{
+    width:35px;
+    height:35px;
+}
+
+.whatsapp-float:hover{
+    transform:scale(1.1);
+    box-shadow:0 15px 35px rgba(0,0,0,0.4);
+}
+
+/* Mobile Adjustment */
+@media(max-width:768px){
+    .whatsapp-float{
+        width:55px;
+        height:55px;
+        bottom:70px;
+        right:15px;
+    }
+
+    .whatsapp-float img{
+        width:30px;
+        height:30px;
+    }
+}
+/* ===== PHONE FLOAT BUTTON ===== */
+.phone-float{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:60px;
+    height:60px;
+    background:#2563eb; /* blue */
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    z-index:9999;
+    transition:0.3s;
+}
+
+.phone-float:hover{
+    transform:scale(1.1);
+    box-shadow:0 15px 35px rgba(0,0,0,0.4);
+}
+
+/* Mobile */
+@media(max-width:768px){
+    .phone-float{
+        width:55px;
+        height:55px;
+        font-size:22px;
+        bottom:15px;
+        right:15px;
+    }
+}

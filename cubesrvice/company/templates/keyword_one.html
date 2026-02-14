@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Keyword One</title>
+</head>
+<body>
+{% include 'headerr.html' %}
+<h2>Add Keyword Two</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="keyword" placeholder="Enter keyword" required>
+    <button type="submit" name="add_keyword">Submit</button>
+</form>
+
+<hr>
+
+<h3>Saved Keywords</h3>
+
+<ul>
+    {% for k in keywords %}
+        <li>
+            {{ k.keyword }}
+
+            <form method="POST" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="keyword_id" value="{{ k.id }}">
+                <button type="submit" name="delete_keyword"
+                        onclick="return confirm('Are you sure to delete?')">
+                    Delete
+                </button>
+            </form>
+        </li>
+    {% empty %}
+        <li>No keywords found</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
