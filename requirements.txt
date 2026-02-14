@@ -4,3 +4,6 @@ whitenoise
 psycopg2-binary 
 djangorestframework 
 django-cors-headers 
+djangorestframework 
+django-cors-headers 
+pillow 
