@@ -1,11 +1,8 @@
 django 
 gunicorn 
 whitenoise 
-psycopg2-binary 
-djangorestframework 
-django-cors-headers 
-djangorestframework 
-django-cors-headers 
-pillow 
 djangorestframework 
 djangorestframework-simplejwt 
+django-cors-headers 
+pillow 
+psycopg2-binary 
